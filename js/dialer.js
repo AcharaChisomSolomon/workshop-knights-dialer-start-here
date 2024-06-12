@@ -23,19 +23,16 @@ function reachableKeys(startingDigit) {
 	return knightMoves[startingDigit];
 }
 
-function countPaths(startingDigit, hopCount, visited = [], count = 0) {
-	visited.push(startingDigit);
-
+function countPaths(startingDigit, hopCount, count = 0) {
 	if (hopCount === 0) {
 		count++;
-		console.log(visited);
 		return count;
 	}
 
 	const reachable = knightMoves[startingDigit];
 
 	reachable.forEach(digit => {
-		count = countPaths(digit, hopCount - 1, visited.slice(), count);
+		count = countPaths(digit, hopCount - 1, count);
 	});
 
 	return count;
