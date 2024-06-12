@@ -23,7 +23,7 @@ function reachableKeys(startingDigit) {
 	return knightMoves[startingDigit];
 }
 
-function countPaths(startingDigit,hopCount, visited = [], count = 0) {
+function countPaths(startingDigit, hopCount, visited = [], count = 0) {
 	visited.push(startingDigit);
 
 	if (hopCount === 0) {
