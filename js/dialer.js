@@ -23,19 +23,22 @@ function reachableKeys(startingDigit) {
 	return knightMoves[startingDigit];
 }
 
-function countPaths(startingDigit, hopCount, count = 0) {
-	if (hopCount === 0) {
-		count++;
-		return count;
+function countPaths(startingDigit, hopCount) {
+	let previousPathsCount = new Array(10).fill(1);
+
+	for (let i = 0; i < hopCount; i++) {
+		const currentPathsCount = new Array(10).fill(0);
+
+		previousPathsCount.forEach((count, digit) => {
+			knightMoves[digit].forEach(reachableDigit => {
+				currentPathsCount[reachableDigit] += count;
+			});
+		});
+
+		previousPathsCount = currentPathsCount;
 	}
 
-	const reachable = knightMoves[startingDigit];
-
-	reachable.forEach(digit => {
-		count = countPaths(digit, hopCount - 1, count);
-	});
-
-	return count;
+	return previousPathsCount[startingDigit];
 }
 
 function listAcyclicPaths(startingDigit, visited = [], paths = []) {
